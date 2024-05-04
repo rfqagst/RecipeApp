@@ -26,14 +26,14 @@ import com.example.tugasfrontendcompose.ui.components.HomeFoodCard
 
 @Composable
 fun HomeScreen(modifier: Modifier) {
-    Column(modifier = modifier) {
+    Column {
         Box(
             modifier = Modifier
+                .background(color = Color(0xFFCE1717))
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .background(color = Color(0xFFCE1717))
         ) {
-            Column {
+            Column(modifier = Modifier.padding(16.dp)) {
                 Text(
                     text = "Hallo, Rifqi",
                     color = Color.White,
@@ -48,31 +48,37 @@ fun HomeScreen(modifier: Modifier) {
 
             }
         }
+        Spacer(modifier = Modifier.height(16.dp))
 
-        Spacer(modifier = Modifier.height(12.dp))
-        Text(text = "Food Categories", fontSize = 20.sp, fontWeight = FontWeight.Bold)
-        LazyRow {
-            items(14) {
-                HomeCategoriesCard(
-                    modifier = Modifier.padding(6.dp),
-                    foodImage = painterResource(id = R.drawable.beef),
-                    foodName = "Beef"
-                )
-            }
-        }
-        LazyColumn {
-            items(11) {
-                HomeFoodCard(
-                    modifier = Modifier,
-                    foodName = "Burger",
-                    foodCountry = "Vietnam",
-                    foodImage = painterResource(
-                        id = R.drawable.beef
+        Column(modifier = modifier.padding(start = 16.dp)) {
+            Text(text = "Food Categories", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            Spacer(modifier = Modifier.height(11.dp))
+
+            LazyRow {
+                items(14) {
+                    HomeCategoriesCard(
+                        modifier = Modifier.padding(end = 11.dp),
+                        foodImage = painterResource(id = R.drawable.beef),
+                        foodName = "Beef"
                     )
-                )
+                }
             }
-        }
 
+            Spacer(modifier = Modifier.height(16.dp))
+            LazyColumn(modifier = Modifier.padding(start = 14.dp)) {
+                items(11) {
+                    HomeFoodCard(
+                        modifier = Modifier,
+                        foodName = "Burger",
+                        foodCountry = "Vietnam",
+                        foodImage = painterResource(
+                            id = R.drawable.beef
+                        )
+                    )
+                }
+            }
+
+        }
     }
 }
 

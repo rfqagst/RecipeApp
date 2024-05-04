@@ -12,7 +12,7 @@ import com.example.tugasfrontendcompose.ui.screen.HomeScreen
 
 @Composable
 fun NavGraph(navController: NavHostController, modifier: Modifier) {
-    NavHost(navController = navController, startDestination = "") {
+    NavHost(navController = navController, startDestination = Screen.Home.route) {
 
         composable(route = Screen.Home.route) {
             HomeScreen(modifier = modifier)

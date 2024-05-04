@@ -86,7 +86,7 @@ fun HomeFoodCard(modifier: Modifier, foodName: String, foodCountry: String, food
                 modifier = Modifier.fillMaxWidth(),
                 text = foodName,
                 fontWeight = FontWeight.Bold,
-                fontSize = 15.sp,
+                fontSize = 16.sp,
                 overflow = TextOverflow.Ellipsis, maxLines = 2
             )
             Spacer(modifier = Modifier.height(8.dp))
