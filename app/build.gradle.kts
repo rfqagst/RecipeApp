@@ -50,6 +50,9 @@ android {
 }
 
 dependencies {
+    implementation (libs.androidx.ui.text.google.fonts)
+    implementation (libs.androidx.material.icons.extended)
+
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
