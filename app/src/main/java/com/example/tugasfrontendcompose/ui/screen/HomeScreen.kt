@@ -7,16 +7,22 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.tugasfrontendcompose.ui.theme.fontFamily
+import com.example.tugasfrontendcompose.R
+import com.example.tugasfrontendcompose.ui.components.HomeCategoriesCard
+import com.example.tugasfrontendcompose.ui.components.HomeFoodCard
 
 @Composable
 fun HomeScreen(modifier: Modifier) {
@@ -34,13 +40,38 @@ fun HomeScreen(modifier: Modifier) {
                     fontSize = 40.sp,
                     fontWeight = FontWeight.Bold
                 )
-                Text(text = "What do you want to cook today?",color = Color.White, fontSize = 20.sp)
+                Text(
+                    text = "What do you want to cook today?",
+                    color = Color.White,
+                    fontSize = 20.sp
+                )
 
             }
         }
 
         Spacer(modifier = Modifier.height(12.dp))
         Text(text = "Food Categories", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+        LazyRow {
+            items(14) {
+                HomeCategoriesCard(
+                    modifier = Modifier.padding(6.dp),
+                    foodImage = painterResource(id = R.drawable.beef),
+                    foodName = "Beef"
+                )
+            }
+        }
+        LazyColumn {
+            items(11) {
+                HomeFoodCard(
+                    modifier = Modifier,
+                    foodName = "Burger",
+                    foodCountry = "Vietnam",
+                    foodImage = painterResource(
+                        id = R.drawable.beef
+                    )
+                )
+            }
+        }
 
     }
 }

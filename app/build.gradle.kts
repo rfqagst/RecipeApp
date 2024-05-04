@@ -52,6 +52,8 @@ android {
 dependencies {
     implementation (libs.androidx.ui.text.google.fonts)
     implementation (libs.androidx.material.icons.extended)
+    implementation(libs.androidx.navigation.compose)
+    implementation (libs.androidx.core.splashscreen)
 
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
