@@ -6,8 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.tugasfrontendcompose.data.repo.FoodRepo
 import com.example.tugasfrontendcompose.di.Injection
 import com.example.tugasfrontendcompose.ui.screen.home.HomeViewModel
-import com.example.tugasfrontendcompose.ui.screen.recomendation.LocalFoodViewModel
-import com.example.tugasfrontendcompose.ui.screen.recomendation.RecomViewModel
+import com.example.tugasfrontendcompose.ui.screen.recomendation.LocationFoodViewModel
 
 class FoodModelFactory(private val repo: FoodRepo) :
     ViewModelProvider.NewInstanceFactory() {
@@ -16,8 +15,9 @@ class FoodModelFactory(private val repo: FoodRepo) :
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(repo) as T
             }
-            modelClass.isAssignableFrom(LocalFoodViewModel::class.java) -> {
-                LocalFoodViewModel(repo) as T
+
+            modelClass.isAssignableFrom(LocationFoodViewModel::class.java) -> {
+                LocationFoodViewModel(repo) as T
             }
 
 
@@ -28,6 +28,7 @@ class FoodModelFactory(private val repo: FoodRepo) :
     companion object {
         @Volatile
         private var INSTANCE: FoodModelFactory? = null
+
         @JvmStatic
         fun getInstance(context: Context): FoodModelFactory {
             return INSTANCE ?: synchronized(FoodModelFactory::class.java) {

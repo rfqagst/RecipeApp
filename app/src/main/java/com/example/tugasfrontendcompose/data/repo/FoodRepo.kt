@@ -40,7 +40,7 @@ class FoodRepo(
     }
     suspend fun getFoodByLocation(@Query("c") location: String): Resource<ResponseCategoryFood> {
         val response = try {
-            apiService.getFoodByCategory(location)
+            apiService.getFoodByLocation(location)
         } catch (e: Exception) {
             return Resource.Error("Error unknown")
         }

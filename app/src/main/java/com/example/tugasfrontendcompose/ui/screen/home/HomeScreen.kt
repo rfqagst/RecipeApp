@@ -80,9 +80,13 @@ fun HomeScreen(modifier: Modifier, homeViewModel: HomeViewModel) {
             Spacer(modifier = Modifier.height(25.dp))
 
 
+
+
             LazyColumn(modifier = Modifier.padding(start = 14.dp)) {
                 items(categoriesFood.size) { index ->
                     categoriesFood[index]?.let { categoriesFood ->
+
+
                         HomeFoodCard(
                             modifier = Modifier,
                             foodName = categoriesFood.strMeal ?: "Unknown Meal",

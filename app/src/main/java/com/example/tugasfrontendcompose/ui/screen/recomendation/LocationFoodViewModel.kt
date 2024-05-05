@@ -21,11 +21,11 @@ class LocationFoodViewModel(val foodRepo: FoodRepo) : ViewModel() {
     private val _locationFood = mutableStateOf<List<MealsItem?>?>(null)
     val locationFood: State<List<MealsItem?>?> = _locationFood
 
-    var activeCategory by mutableStateOf<String?>(null)
+    var activeLocation by mutableStateOf<String?>(null)
 
     init {
         getLocation()
-        getFoodByLocation("Canadian")
+        getFoodByLocation("American")
     }
 
     fun getLocation() {
@@ -40,7 +40,7 @@ class LocationFoodViewModel(val foodRepo: FoodRepo) : ViewModel() {
     }
 
     fun getFoodByLocation(location: String) {
-        activeCategory = location
+        activeLocation = location
         viewModelScope.launch {
             val result = foodRepo.getFoodByLocation(location)
             if (result is Resource.Success) {

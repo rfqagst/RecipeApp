@@ -1,6 +1,7 @@
 package com.example.tugasfrontendcompose.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -104,9 +105,47 @@ fun HomeFoodCard(modifier: Modifier, foodName: String, foodImage: String) {
 }
 
 @Composable
-fun LocationFilterCard(foodLocation: String, isActive: Boolean) {
-    Column {
-        Text(text = foodLocation)
+fun LocationFilterCard(modifier: Modifier, foodLocation: String, isActive: Boolean) {
+    Column(
+        modifier = modifier
+            .width(100.dp)
+            .height(50.dp)
+            .clip(RoundedCornerShape(10.dp))
+            .background(if (isActive) Color(0xffCE1616) else Color(0xffEFEFEF)),
+        verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = foodLocation,
+            color = if (isActive) Color.White else Color(0xFF1B1717),
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+
+            )
+    }
+}
+
+@Composable
+fun LocationFoodCard(modifier: Modifier, foodImage: String?, foodName: String) {
+    Column(horizontalAlignment = Alignment.Start) {
+        Box(
+            modifier.clip(RoundedCornerShape(10.dp))
+
+        ) {
+            AsyncImage(
+                model = foodImage,
+                contentDescription = foodName,
+                modifier = Modifier
+                    .fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+        }
+        Text(
+            modifier = Modifier.padding(start = 11.dp, bottom = 12.dp),
+            text = foodName,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            fontWeight = FontWeight.Bold, fontSize = 20.sp
+        )
     }
 }
 
