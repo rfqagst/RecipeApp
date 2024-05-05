@@ -57,7 +57,7 @@ fun HomeScreen(modifier: Modifier, homeViewModel: HomeViewModel) {
             Text(text = "Food Categories", fontSize = 20.sp, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(11.dp))
 
-            LazyRow() {
+            LazyRow {
                 items(categories.size) { index ->
                     categories[index]?.let { category ->
                         val isActive = category.strCategory == activeCategory
@@ -87,7 +87,6 @@ fun HomeScreen(modifier: Modifier, homeViewModel: HomeViewModel) {
                             modifier = Modifier,
                             foodName = categoriesFood.strMeal ?: "Unknown Meal",
                             foodImage = categoriesFood.strMealThumb ?: "Unknown Image",
-                            foodCountry = "Vietnam"
                         )
                     }
 

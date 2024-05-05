@@ -29,7 +29,7 @@ class HomeViewModel(val foodRepo: FoodRepo) : ViewModel() {
         getFoodByCategory("Beef")
     }
 
-     fun getCategory() {
+    fun getCategory() {
         viewModelScope.launch {
             val result = foodRepo.getCategory()
             if (result is Resource.Success) {
@@ -40,8 +40,8 @@ class HomeViewModel(val foodRepo: FoodRepo) : ViewModel() {
         }
     }
 
-     fun getFoodByCategory(category : String) {
-         activeCategory = category
+    fun getFoodByCategory(category: String) {
+        activeCategory = category
         viewModelScope.launch {
             val result = foodRepo.getFoodByCategory(category)
             if (result is Resource.Success) {

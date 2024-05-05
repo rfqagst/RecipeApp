@@ -3,6 +3,7 @@ package com.example.tugasfrontendcompose.data.repo
 import com.example.tugasfrontendcompose.data.response.ResponseCategory
 import com.example.tugasfrontendcompose.data.response.ResponseCategoryFood
 import com.example.tugasfrontendcompose.data.response.ResponseDetailFood
+import com.example.tugasfrontendcompose.data.response.ResponseFoodLocation
 import com.example.tugasfrontendcompose.data.retrofit.ApiService
 import com.example.tugasfrontendcompose.util.Resource
 import retrofit2.http.Query
@@ -29,6 +30,24 @@ class FoodRepo(
 
     }
 
+    suspend fun getLocation(): Resource<ResponseFoodLocation> {
+        val response = try {
+            apiService.getLocation()
+        } catch (e: Exception) {
+            return Resource.Error("Error unknown")
+        }
+        return Resource.Success(response)
+    }
+    suspend fun getFoodByLocation(@Query("c") location: String): Resource<ResponseCategoryFood> {
+        val response = try {
+            apiService.getFoodByCategory(location)
+        } catch (e: Exception) {
+            return Resource.Error("Error unknown")
+        }
+        return Resource.Success(response)
+
+    }
+
     suspend fun getDetailFoodById(@Query("i") id: String): Resource<ResponseDetailFood> {
 
         val response = try {
@@ -40,16 +59,6 @@ class FoodRepo(
 
     }
 
-    suspend fun getFoodByRandom(): Resource<ResponseCategoryFood> {
-
-        val response = try {
-            apiService.getFoodByRandom()
-        } catch (e: Exception) {
-            return Resource.Error("Error unknown")
-        }
-        return Resource.Success(response)
-
-    }
 
 
     companion object {
