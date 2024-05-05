@@ -32,12 +32,12 @@ import androidx.compose.ui.unit.sp
 import com.example.tugasfrontendcompose.R
 
 @Composable
-fun HomeCategoriesCard(modifier: Modifier, foodImage: Painter, foodName: String) {
+fun HomeCategoriesCard(modifier: Modifier, foodImage: Painter, foodCategory: String) {
     Box(
         modifier = modifier
             .width(100.dp)
             .height(105.dp)
-            .clip(RoundedCornerShape(10.dp)) // Memastikan clip diterapkan untuk memotong konten di dalam border
+            .clip(RoundedCornerShape(10.dp))
             .background(Color(0xFFEFEFEF)),
         contentAlignment = Alignment.Center
     ) {
@@ -48,16 +48,16 @@ fun HomeCategoriesCard(modifier: Modifier, foodImage: Painter, foodName: String)
 //            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(6.dp) // Memastikan gambar mengisi box sepenuhnya
+                .padding(6.dp)
         )
         Text(
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             color = Color(0xFF1B1717),
-            text = foodName,
+            text = foodCategory,
             modifier = Modifier
                 .padding(6.dp)
-                .align(Alignment.BottomStart) // Menempatkan teks di bawah tengah
+                .align(Alignment.BottomStart)
         )
     }
 }
@@ -148,9 +148,9 @@ fun PreviewCard() {
             .padding(16.dp),
     ) {
         HomeCategoriesCard(
-            modifier = Modifier.padding(16.dp), // Menambahkan padding untuk estetika
+            modifier = Modifier.padding(16.dp),
             foodImage = painterResource(id = R.drawable.beef),
-            foodName = "Beef"
+            foodCategory = "Beef"
         )
 
 //        HomeFoodCard(

@@ -1,4 +1,4 @@
-package com.example.tugasfrontendcompose.ui.screen
+package com.example.tugasfrontendcompose.ui.screen.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -25,7 +25,10 @@ import com.example.tugasfrontendcompose.ui.components.HomeCategoriesCard
 import com.example.tugasfrontendcompose.ui.components.HomeFoodCard
 
 @Composable
-fun HomeScreen(modifier: Modifier) {
+fun HomeScreen(modifier: Modifier, homeViewModel: HomeViewModel) {
+    val categories = homeViewModel.categories.value ?: emptyList()
+
+
     Column {
         Box(
             modifier = Modifier
@@ -55,14 +58,19 @@ fun HomeScreen(modifier: Modifier) {
             Spacer(modifier = Modifier.height(11.dp))
 
             LazyRow {
-                items(14) {
-                    HomeCategoriesCard(
-                        modifier = Modifier.padding(end = 11.dp),
-                        foodImage = painterResource(id = R.drawable.beef),
-                        foodName = "Beef"
-                    )
+                items(categories.size) { index ->
+                    categories[index]?.let { category ->
+                        HomeCategoriesCard(
+                            modifier = Modifier.padding(end = 11.dp),
+                            foodImage = painterResource(id = R.drawable.beef), // Update this part based on actual data
+                            foodCategory = category.strCategory ?: "Unknown Category"
+                        )
+                    }
                 }
             }
+
+
+
 
             Spacer(modifier = Modifier.height(16.dp))
             LazyColumn(modifier = Modifier.padding(start = 14.dp)) {
@@ -85,5 +93,5 @@ fun HomeScreen(modifier: Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
-    HomeScreen(modifier = Modifier.fillMaxSize())
+//    HomeScreen(modifier = Modifier.fillMaxSize())
 }

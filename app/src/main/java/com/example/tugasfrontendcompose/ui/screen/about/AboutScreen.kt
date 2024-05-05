@@ -1,4 +1,4 @@
-package com.example.tugasfrontendcompose.ui.screen
+package com.example.tugasfrontendcompose.ui.screen.about
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

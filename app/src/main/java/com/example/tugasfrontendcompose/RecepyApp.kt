@@ -55,7 +55,7 @@ fun BottomBarComponent(navHostController: NavHostController) {
     }
 
     NavigationBar(
-        containerColor = Color.White,
+        containerColor = Color(0xFFFBFBFB),
         modifier = Modifier.border(1.dp, Color(0xFFD9D9D9))
     ) {
         bottomNavItems.forEachIndexed { index, bottomNavItem ->
