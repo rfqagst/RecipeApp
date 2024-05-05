@@ -2,7 +2,6 @@ package com.example.tugasfrontendcompose.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,37 +22,44 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.tugasfrontendcompose.R
 
 @Composable
-fun HomeCategoriesCard(modifier: Modifier, foodImage: Painter, foodCategory: String) {
+fun HomeCategoriesCard(
+    modifier: Modifier,
+    foodImage: String?,
+    foodCategory: String,
+    isActive : Boolean
+) {
     Box(
         modifier = modifier
             .width(100.dp)
             .height(105.dp)
             .clip(RoundedCornerShape(10.dp))
-            .background(Color(0xFFEFEFEF)),
+            .background(if (isActive) Color(0xffCE1616) else Color(0xffEFEFEF)),
         contentAlignment = Alignment.Center
     ) {
-        Image(
-            painter = foodImage,
-            contentDescription = null,
-            alignment = Alignment.TopStart,
-//            contentScale = ContentScale.Crop,
-            modifier = Modifier
+
+        AsyncImage(
+            model = foodImage, contentDescription = foodCategory, modifier = Modifier
                 .fillMaxSize()
-                .padding(6.dp)
+                .padding(6.dp), alignment = Alignment.TopStart
         )
+
         Text(
             fontSize = 20.sp,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
             fontWeight = FontWeight.Bold,
-            color = Color(0xFF1B1717),
+            color = if (isActive) Color.White else Color(0xFF1B1717),
             text = foodCategory,
             modifier = Modifier
                 .padding(6.dp)
@@ -63,7 +69,7 @@ fun HomeCategoriesCard(modifier: Modifier, foodImage: Painter, foodCategory: Str
 }
 
 @Composable
-fun HomeFoodCard(modifier: Modifier, foodName: String, foodCountry: String, foodImage: Painter) {
+fun HomeFoodCard(modifier: Modifier, foodName: String, foodCountry: String, foodImage: String) {
 
     Row(modifier = modifier) {
         Box(
@@ -74,11 +80,16 @@ fun HomeFoodCard(modifier: Modifier, foodName: String, foodCountry: String, food
                 .background(Color(0xFFEFEFEF)),
             contentAlignment = Alignment.Center
         ) {
-            Image(
-                painter = foodImage,
-                contentDescription = null,
-                modifier = Modifier.padding(6.dp)
+
+            AsyncImage(
+                model = foodImage,
+                contentDescription = foodName,
+                modifier = Modifier
+                    .fillMaxSize(),
+                contentScale = ContentScale.Crop
             )
+
+
         }
         Spacer(modifier = Modifier.width(12.dp))
         Column {
@@ -86,24 +97,15 @@ fun HomeFoodCard(modifier: Modifier, foodName: String, foodCountry: String, food
                 modifier = Modifier.fillMaxWidth(),
                 text = foodName,
                 fontWeight = FontWeight.Bold,
-                fontSize = 16.sp,
+                fontSize = 20.sp,
                 overflow = TextOverflow.Ellipsis, maxLines = 2
             )
             Spacer(modifier = Modifier.height(8.dp))
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    imageVector = Icons.Default.LocationCity,
-                    contentDescription = null,
-                    tint = Color(0xFFCE1616)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(text = foodCountry, fontSize = 15.sp)
-            }
+
         }
 
     }
     Spacer(modifier = Modifier.height(15.dp))
-
 
 
 }
@@ -111,11 +113,12 @@ fun HomeFoodCard(modifier: Modifier, foodName: String, foodCountry: String, food
 
 @Composable
 fun RecomendationFoodCard(modifier: Modifier, foodImage: Painter, foodName: String) {
-    Box(modifier = modifier
-        .width(170.dp)
-        .height(140.dp)
-        .clip(RoundedCornerShape(10.dp))
-        .background(Color(0xFFEFEFEF)),
+    Box(
+        modifier = modifier
+            .width(170.dp)
+            .height(140.dp)
+            .clip(RoundedCornerShape(10.dp))
+            .background(Color(0xFFEFEFEF)),
         contentAlignment = Alignment.Center
 
     ) {
@@ -147,11 +150,11 @@ fun PreviewCard() {
             .fillMaxSize()
             .padding(16.dp),
     ) {
-        HomeCategoriesCard(
-            modifier = Modifier.padding(16.dp),
-            foodImage = painterResource(id = R.drawable.beef),
-            foodCategory = "Beef"
-        )
+//        HomeCategoriesCard(
+//            modifier = Modifier.padding(16.dp),
+//            foodImage = painterResource(id = R.drawable.beef),
+//            foodCategory = "Beef"
+//        )
 
 //        HomeFoodCard(
 //            modifier = Modifier,
@@ -162,9 +165,11 @@ fun PreviewCard() {
 //            )
 //        )
 
-        RecomendationFoodCard(modifier = Modifier,foodImage = painterResource(
-            id = R.drawable.beef
-        ), foodName = "Vietnamese Grilled Pork (bun-thit-nuong)" )
+        RecomendationFoodCard(
+            modifier = Modifier, foodImage = painterResource(
+                id = R.drawable.beef
+            ), foodName = "Vietnamese Grilled Pork (bun-thit-nuong)"
+        )
 
     }
 }

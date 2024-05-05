@@ -1,10 +1,10 @@
 package com.example.tugasfrontendcompose.ui.screen.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -15,18 +15,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.tugasfrontendcompose.R
 import com.example.tugasfrontendcompose.ui.components.HomeCategoriesCard
 import com.example.tugasfrontendcompose.ui.components.HomeFoodCard
 
 @Composable
 fun HomeScreen(modifier: Modifier, homeViewModel: HomeViewModel) {
     val categories = homeViewModel.categories.value ?: emptyList()
+    val categoriesFood = homeViewModel.categoriesFood.value ?: emptyList()
+
+    val activeCategory = homeViewModel.activeCategory
 
 
     Column {
@@ -57,41 +57,47 @@ fun HomeScreen(modifier: Modifier, homeViewModel: HomeViewModel) {
             Text(text = "Food Categories", fontSize = 20.sp, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(11.dp))
 
-            LazyRow {
+            LazyRow() {
                 items(categories.size) { index ->
                     categories[index]?.let { category ->
+                        val isActive = category.strCategory == activeCategory
                         HomeCategoriesCard(
-                            modifier = Modifier.padding(end = 11.dp),
-                            foodImage = painterResource(id = R.drawable.beef), // Update this part based on actual data
-                            foodCategory = category.strCategory ?: "Unknown Category"
+                            modifier = Modifier
+                                .padding(end = 11.dp)
+                                .clickable {
+                                    val categoryValue = category.strCategory ?: "Unknown Category"
+                                    homeViewModel.getFoodByCategory(categoryValue)
+
+                                },
+                            foodImage = category.strCategoryThumb,
+                            foodCategory = category.strCategory ?: "Unknown Category",
+                            isActive = isActive
                         )
                     }
                 }
             }
 
+            Spacer(modifier = Modifier.height(25.dp))
 
 
-
-            Spacer(modifier = Modifier.height(16.dp))
             LazyColumn(modifier = Modifier.padding(start = 14.dp)) {
-                items(11) {
-                    HomeFoodCard(
-                        modifier = Modifier,
-                        foodName = "Burger",
-                        foodCountry = "Vietnam",
-                        foodImage = painterResource(
-                            id = R.drawable.beef
+                items(categoriesFood.size) { index ->
+                    categoriesFood[index]?.let { categoriesFood ->
+                        HomeFoodCard(
+                            modifier = Modifier,
+                            foodName = categoriesFood.strMeal ?: "Unknown Meal",
+                            foodImage = categoriesFood.strMealThumb ?: "Unknown Image",
+                            foodCountry = "Vietnam"
                         )
-                    )
+                    }
+
                 }
             }
-
         }
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun Preview() {
-//    HomeScreen(modifier = Modifier.fillMaxSize())
-}
+//        @Preview(showBackground = true)
+//        @Composable
+//        fun Preview() {
+////    HomeScreen(modifier = Modifier.fillMaxSize())
+//        }
