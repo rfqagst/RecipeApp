@@ -2,6 +2,7 @@ package com.example.tugasfrontendcompose.ui.navigation
 
 import com.example.tugasfrontendcompose.R
 
+
 data class BottomNavItem(
     val title: String,
     val selectedIcon: Int,
@@ -18,8 +19,8 @@ var bottomNavItems = listOf(
         unselectedIcon = R.drawable.unselect_home
     ),
     BottomNavItem(
-        title = "Recom",
-        route = "availablerecipe",
+        title = "Local Food",
+        route = "localfood",
         selectedIcon = R.drawable.select_recom,
         unselectedIcon = R.drawable.unselect_recom
     ),

@@ -15,11 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.tugasfrontendcompose.ui.components.LocationFilterCard
 import com.example.tugasfrontendcompose.ui.components.LocationFoodCard
 
 @Composable
-fun LocationFoodScreen(modifier: Modifier, locationFoodViewModel: LocationFoodViewModel) {
+fun LocationFoodScreen(modifier: Modifier, locationFoodViewModel: LocationFoodViewModel,navController: NavHostController) {
     val location = locationFoodViewModel.location.value ?: emptyList()
     val foodLocation = locationFoodViewModel.locationFood.value ?: emptyList()
     val activeLocation = locationFoodViewModel.activeLocation

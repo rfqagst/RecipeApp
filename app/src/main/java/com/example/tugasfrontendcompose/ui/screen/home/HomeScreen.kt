@@ -18,11 +18,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.tugasfrontendcompose.ui.components.HomeCategoriesCard
 import com.example.tugasfrontendcompose.ui.components.HomeFoodCard
+import com.example.tugasfrontendcompose.ui.navigation.Screen
 
 @Composable
-fun HomeScreen(modifier: Modifier, homeViewModel: HomeViewModel) {
+fun HomeScreen(modifier: Modifier, homeViewModel: HomeViewModel, navController: NavHostController) {
     val categories = homeViewModel.categories.value ?: emptyList()
     val categoriesFood = homeViewModel.categoriesFood.value ?: emptyList()
 
@@ -86,9 +88,10 @@ fun HomeScreen(modifier: Modifier, homeViewModel: HomeViewModel) {
                 items(categoriesFood.size) { index ->
                     categoriesFood[index]?.let { categoriesFood ->
 
-
                         HomeFoodCard(
-                            modifier = Modifier,
+                            modifier = Modifier.clickable {
+                                navController.navigate(Screen.Detail.route)
+                            },
                             foodName = categoriesFood.strMeal ?: "Unknown Meal",
                             foodImage = categoriesFood.strMealThumb ?: "Unknown Image",
                         )
