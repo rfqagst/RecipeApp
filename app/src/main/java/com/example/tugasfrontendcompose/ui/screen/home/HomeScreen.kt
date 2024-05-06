@@ -11,9 +11,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -23,12 +35,20 @@ import com.example.tugasfrontendcompose.ui.components.HomeCategoriesCard
 import com.example.tugasfrontendcompose.ui.components.HomeFoodCard
 import com.example.tugasfrontendcompose.ui.navigation.Screen
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(modifier: Modifier, homeViewModel: HomeViewModel, navController: NavHostController) {
     val categories = homeViewModel.categories.value ?: emptyList()
     val categoriesFood = homeViewModel.categoriesFood.value ?: emptyList()
 
     val activeCategory = homeViewModel.activeCategory
+
+    var textSearch by remember {
+        mutableStateOf("")
+    }
+    var activeSearch by remember {
+        mutableStateOf(false)
+    }
 
 
     Column {
@@ -39,19 +59,78 @@ fun HomeScreen(modifier: Modifier, homeViewModel: HomeViewModel, navController: 
                 .wrapContentHeight()
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
-                Text(
-                    text = "Hallo, Rifqi",
-                    color = Color.White,
-                    fontSize = 40.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    text = "What do you want to cook today?",
-                    color = Color.White,
-                    fontSize = 20.sp
-                )
+                Column() {
+                    Text(
+                        text = "Hallo, Rifqi",
+                        color = Color.White,
+                        fontSize = 40.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "What do you want to cook today?",
+                        color = Color.White,
+                        fontSize = 20.sp
+                    )
 
+                }
+                Spacer(modifier = Modifier.height(12.dp))
+                Column(modifier = Modifier.clip(RoundedCornerShape(10.dp))) {
+                    SearchBar(
+                        shape = RoundedCornerShape(10.dp),
+                        query = textSearch,
+                        onQueryChange = {
+                            textSearch = it
+                        },
+                        onSearch = {
+                            activeSearch = false
+                        },
+
+                        active = activeSearch,
+                        onActiveChange = {
+                            activeSearch = it
+                        },
+                        placeholder = {
+                            Text(text = "Search Food Recipe", fontSize = 15.sp)
+                        },
+                        leadingIcon = {
+                            Icon(modifier = Modifier.clickable {
+                                activeSearch = false
+                            }, imageVector = Icons.Default.Search, contentDescription = null)
+                        },
+                        trailingIcon = {
+                            if (activeSearch && textSearch.isNotEmpty()) {
+                                Icon(
+                                    modifier = Modifier.clickable {
+                                        textSearch = ""
+                                    },
+                                    imageVector = Icons.Default.Close, contentDescription = null
+                                )
+                            } else if (activeSearch) {
+                                Text(
+                                    modifier = Modifier.clickable {
+                                        activeSearch = false
+                                    },
+                                    text = "Close",
+                                    fontWeight = FontWeight.Bold,
+                                    color = Color(0xffCE1717)
+                                )
+                            }
+                        }
+                    ) {
+                        LazyColumn(modifier = Modifier.padding(16.dp)) {
+                            items(3) {
+                                HomeFoodCard(
+                                    modifier = Modifier,
+                                    foodName = "Burger",
+                                    foodImage = ""
+                                )
+                            }
+                        }
+
+                    }
+                }
             }
+
         }
         Spacer(modifier = Modifier.height(16.dp))
 

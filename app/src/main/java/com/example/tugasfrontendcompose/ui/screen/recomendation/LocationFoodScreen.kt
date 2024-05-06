@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.tugasfrontendcompose.ui.components.LocationFilterCard
 import com.example.tugasfrontendcompose.ui.components.LocationFoodCard
+import com.example.tugasfrontendcompose.ui.navigation.Screen
 
 @Composable
 fun LocationFoodScreen(modifier: Modifier, locationFoodViewModel: LocationFoodViewModel,navController: NavHostController) {
@@ -55,9 +56,11 @@ fun LocationFoodScreen(modifier: Modifier, locationFoodViewModel: LocationFoodVi
             items(foodLocation.size) { index ->
                 foodLocation[index]?.let { foodLocation ->
 
-
                     LocationFoodCard(
-                        modifier = Modifier.padding(12.dp),
+                        modifier = Modifier.padding(12.dp).clickable {
+                            val foodId = foodLocation.idMeal
+                            navController.navigate(Screen.Detail.route + "/$foodId")
+                        },
                         foodImage = foodLocation.strMealThumb,
                         foodName = foodLocation.strMeal ?: "Unknown Meal"
                     )
