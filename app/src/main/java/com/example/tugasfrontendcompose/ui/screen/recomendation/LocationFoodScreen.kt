@@ -26,7 +26,7 @@ fun LocationFoodScreen(modifier: Modifier, locationFoodViewModel: LocationFoodVi
     val activeLocation = locationFoodViewModel.activeLocation
 
 
-    Column(modifier = modifier.padding(16.dp)) {
+    Column(modifier = modifier.padding(16.dp, bottom = 0.dp)) {
         Spacer(modifier = Modifier.height(12.dp))
         LazyRow {
             items(location.size) { index ->

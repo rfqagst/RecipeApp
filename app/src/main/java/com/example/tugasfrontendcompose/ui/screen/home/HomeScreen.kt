@@ -87,10 +87,10 @@ fun HomeScreen(modifier: Modifier, homeViewModel: HomeViewModel, navController: 
             LazyColumn(modifier = Modifier.padding(start = 14.dp)) {
                 items(categoriesFood.size) { index ->
                     categoriesFood[index]?.let { categoriesFood ->
-
                         HomeFoodCard(
                             modifier = Modifier.clickable {
-                                navController.navigate(Screen.Detail.route)
+                                val foodId = categoriesFood.idMeal
+                                navController.navigate(Screen.Detail.route + "/$foodId")
                             },
                             foodName = categoriesFood.strMeal ?: "Unknown Meal",
                             foodImage = categoriesFood.strMealThumb ?: "Unknown Image",
@@ -102,8 +102,3 @@ fun HomeScreen(modifier: Modifier, homeViewModel: HomeViewModel, navController: 
         }
     }
 }
-//        @Preview(showBackground = true)
-//        @Composable
-//        fun Preview() {
-////    HomeScreen(modifier = Modifier.fillMaxSize())
-//        }

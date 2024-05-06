@@ -4,11 +4,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.example.tugasfrontendcompose.di.Injection
 import com.example.tugasfrontendcompose.ui.screen.about.AboutScreen
 import com.example.tugasfrontendcompose.ui.screen.detail.DetailFoodScren
+import com.example.tugasfrontendcompose.ui.screen.detail.DetailFoodViewModel
 import com.example.tugasfrontendcompose.ui.screen.home.HomeScreen
 import com.example.tugasfrontendcompose.ui.screen.home.HomeViewModel
 import com.example.tugasfrontendcompose.ui.screen.recomendation.LocationFoodScreen
@@ -27,13 +30,22 @@ fun NavGraph(navController: NavHostController, modifier: Modifier) {
                 homeViewModel = HomeViewModel(foodRepo), navController = navController
             )
         }
-        composable(route = Screen.Detail.route) {
-            DetailFoodScren(modifier = modifier)
+        composable(
+            route = Screen.Detail.route + "/{foodId}",
+            arguments = listOf(navArgument("foodId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val foodId = backStackEntry.arguments?.getString("foodId") ?: ""
+
+            DetailFoodScren(
+                modifier = modifier,
+                detailFoodViewModel = DetailFoodViewModel(foodRepo, foodId), foodId
+            )
         }
         composable(route = Screen.LocalFood.route) {
             LocationFoodScreen(
                 modifier = modifier,
-                locationFoodViewModel = LocationFoodViewModel(foodRepo), navController = navController
+                locationFoodViewModel = LocationFoodViewModel(foodRepo),
+                navController = navController
             )
         }
         composable(route = Screen.About.route) {
