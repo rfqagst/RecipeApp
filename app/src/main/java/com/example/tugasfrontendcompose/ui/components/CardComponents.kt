@@ -162,8 +162,8 @@ fun LocationFoodCard(modifier: Modifier, foodImage: String?, foodName: String) {
 @Composable
 fun ExpandableRecipeCard(
     title: String,
-    instructions : String,
-    ingredients : String,
+    instructions: String,
+    ingredients: String,
     onClick: () -> Unit,
     rotationState: Float,
     expandedState: Boolean
@@ -244,26 +244,5 @@ fun PreviewCard() {
             .fillMaxSize()
             .padding(16.dp),
     ) {
-//        HomeCategoriesCard(
-//            modifier = Modifier.padding(16.dp),
-//            foodImage = painterResource(id = R.drawable.beef),
-//            foodCategory = "Beef"
-//        )
-
-//        HomeFoodCard(
-//            modifier = Modifier,
-//            foodName = "Vietnamese Grilled Pork (bun-thit-nuong)",
-//            foodCountry = "Brazil",
-//            foodImage = painterResource(
-//                id = R.drawable.beef
-//            )
-//        )
-
-//        RecomendationFoodCard(
-//            modifier = Modifier, foodImage = painterResource(
-//                id = R.drawable.beef
-//            ), foodName = "Vietnamese Grilled Pork (bun-thit-nuong)"
-//        )
-
     }
 }

@@ -4,12 +4,12 @@ import com.google.gson.annotations.SerializedName
 
 data class ResponseFoodLocation(
 
-	@field:SerializedName("meals")
-	val meals: List<MealsItemLocation?>? = null
+    @field:SerializedName("meals")
+    val meals: List<MealsItemLocation?>? = null
 )
 
 data class MealsItemLocation(
 
-	@field:SerializedName("strArea")
-	val strArea: String? = null
+    @field:SerializedName("strArea")
+    val strArea: String? = null
 )

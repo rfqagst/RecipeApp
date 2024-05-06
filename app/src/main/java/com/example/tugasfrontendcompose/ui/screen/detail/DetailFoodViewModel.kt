@@ -1,15 +1,11 @@
 package com.example.tugasfrontendcompose.ui.screen.detail
 
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tugasfrontendcompose.data.repo.FoodRepo
 import com.example.tugasfrontendcompose.data.response.MealsItemDetail
-import com.example.tugasfrontendcompose.ui.components.ShowLoading
 import com.example.tugasfrontendcompose.util.Resource
 import kotlinx.coroutines.launch
 
@@ -17,6 +13,7 @@ class DetailFoodViewModel(private val foodRepo: FoodRepo, private val foodId: St
     ViewModel() {
     private val _detailFood = mutableStateOf<List<MealsItemDetail?>?>(null)
     val detailFood: State<List<MealsItemDetail?>?> = _detailFood
+
 
     init {
         getDetailFoodById(foodId)
@@ -29,8 +26,8 @@ class DetailFoodViewModel(private val foodRepo: FoodRepo, private val foodId: St
             if (result is Resource.Success) {
                 _detailFood.value = result.data?.meals
 
-            } else if (result is Resource.Loading) {
-
+            } else {
+//
             }
         }
     }

@@ -38,6 +38,7 @@ class FoodRepo(
         }
         return Resource.Success(response)
     }
+
     suspend fun getFoodByLocation(@Query("c") location: String): Resource<ResponseCategoryFood> {
         val response = try {
             apiService.getFoodByLocation(location)
@@ -59,7 +60,7 @@ class FoodRepo(
 
     }
 
-    suspend fun searchRecipeByName(@Query("s") recipeName : String) : Resource<ResponseDetailFood> {
+    suspend fun searchRecipeByName(@Query("s") recipeName: String): Resource<ResponseDetailFood> {
 
         val response = try {
             apiService.searchRecipeByName(recipeName)
@@ -69,7 +70,6 @@ class FoodRepo(
         return Resource.Success(response)
 
     }
-
 
 
     companion object {

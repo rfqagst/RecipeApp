@@ -1,6 +1,5 @@
 package com.example.tugasfrontendcompose.ui.screen.detail
 
-import android.util.Log
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
@@ -14,7 +13,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults.cardColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -47,8 +45,7 @@ fun DetailFoodScren(modifier: Modifier, detailFoodViewModel: DetailFoodViewModel
                 modifier = Modifier
                     .width(365.dp)
                     .height(225.dp)
-                    .clip(RoundedCornerShape(10.dp))
-                ,
+                    .clip(RoundedCornerShape(10.dp)),
                 contentScale = ContentScale.Crop
             )
 
