@@ -37,9 +37,15 @@ import com.example.tugasfrontendcompose.ui.navigation.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(modifier: Modifier, homeViewModel: HomeViewModel, navController: NavHostController) {
+fun HomeScreen(
+    modifier: Modifier,
+    homeViewModel: HomeViewModel,
+    navController: NavHostController,
+    searchViewModel: SearchViewModel
+) {
     val categories = homeViewModel.categories.value ?: emptyList()
     val categoriesFood = homeViewModel.categoriesFood.value ?: emptyList()
+    val searchRecipeResult = searchViewModel.recipeName.value ?: emptyList()
 
     val activeCategory = homeViewModel.activeCategory
 
@@ -80,6 +86,7 @@ fun HomeScreen(modifier: Modifier, homeViewModel: HomeViewModel, navController: 
                         query = textSearch,
                         onQueryChange = {
                             textSearch = it
+                            searchViewModel.searchRecipeByName(textSearch)
                         },
                         onSearch = {
                             activeSearch = false
@@ -118,12 +125,18 @@ fun HomeScreen(modifier: Modifier, homeViewModel: HomeViewModel, navController: 
                         }
                     ) {
                         LazyColumn(modifier = Modifier.padding(16.dp)) {
-                            items(3) {
-                                HomeFoodCard(
-                                    modifier = Modifier,
-                                    foodName = "Burger",
-                                    foodImage = ""
-                                )
+                            items(searchRecipeResult.size) { index ->
+                                searchRecipeResult[index]?.let { searchResult ->
+                                    val foodId = searchResult.idMeal
+                                    HomeFoodCard(
+                                        modifier = Modifier.clickable {
+                                            navController.navigate(Screen.Detail.route + "/$foodId")
+                                        },
+                                        foodName = searchResult.strMeal ?: "",
+                                        foodImage = searchResult.strMealThumb ?: ""
+                                    )
+                                }
+
                             }
                         }
 

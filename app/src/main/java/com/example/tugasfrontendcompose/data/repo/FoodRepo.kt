@@ -59,6 +59,17 @@ class FoodRepo(
 
     }
 
+    suspend fun searchRecipeByName(@Query("s") recipeName : String) : Resource<ResponseDetailFood> {
+
+        val response = try {
+            apiService.searchRecipeByName(recipeName)
+        } catch (e: Exception) {
+            return Resource.Error("Error unknown")
+        }
+        return Resource.Success(response)
+
+    }
+
 
 
     companion object {

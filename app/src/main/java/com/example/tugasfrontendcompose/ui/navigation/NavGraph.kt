@@ -14,6 +14,7 @@ import com.example.tugasfrontendcompose.ui.screen.detail.DetailFoodScren
 import com.example.tugasfrontendcompose.ui.screen.detail.DetailFoodViewModel
 import com.example.tugasfrontendcompose.ui.screen.home.HomeScreen
 import com.example.tugasfrontendcompose.ui.screen.home.HomeViewModel
+import com.example.tugasfrontendcompose.ui.screen.home.SearchViewModel
 import com.example.tugasfrontendcompose.ui.screen.recomendation.LocationFoodScreen
 import com.example.tugasfrontendcompose.ui.screen.recomendation.LocationFoodViewModel
 
@@ -24,11 +25,14 @@ fun NavGraph(navController: NavHostController, modifier: Modifier) {
 
     NavHost(navController = navController, startDestination = Screen.Home.route) {
 
-        composable(route = Screen.Home.route) {
+        composable(
+            route = Screen.Home.route,
+        ) {
             HomeScreen(
                 modifier = modifier,
                 homeViewModel = HomeViewModel(foodRepo),
-                navController = navController
+                navController = navController,
+                searchViewModel = SearchViewModel(foodRepo)
             )
         }
         composable(
