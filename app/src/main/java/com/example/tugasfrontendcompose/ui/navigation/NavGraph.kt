@@ -27,7 +27,8 @@ fun NavGraph(navController: NavHostController, modifier: Modifier) {
         composable(route = Screen.Home.route) {
             HomeScreen(
                 modifier = modifier,
-                homeViewModel = HomeViewModel(foodRepo), navController = navController
+                homeViewModel = HomeViewModel(foodRepo),
+                navController = navController
             )
         }
         composable(
@@ -38,7 +39,7 @@ fun NavGraph(navController: NavHostController, modifier: Modifier) {
 
             DetailFoodScren(
                 modifier = modifier,
-                detailFoodViewModel = DetailFoodViewModel(foodRepo, foodId), foodId
+                detailFoodViewModel = DetailFoodViewModel(foodRepo, foodId)
             )
         }
         composable(route = Screen.LocalFood.route) {

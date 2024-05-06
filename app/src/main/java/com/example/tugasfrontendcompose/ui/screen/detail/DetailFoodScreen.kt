@@ -30,16 +30,12 @@ import coil.compose.AsyncImage
 import com.example.tugasfrontendcompose.ui.components.ExpandableRecipeCard
 
 @Composable
-fun DetailFoodScren(modifier: Modifier, detailFoodViewModel: DetailFoodViewModel, foodId: String) {
+fun DetailFoodScren(modifier: Modifier, detailFoodViewModel: DetailFoodViewModel) {
 
     var expandedState by remember { mutableStateOf(false) }
     val rotationState by animateFloatAsState(targetValue = if (expandedState) 180f else 0f)
 
     val detailFood = detailFoodViewModel.detailFood.value ?: emptyList()
-
-//    LaunchedEffect(foodId) {
-//        detailFoodViewModel.getDetailFoodById(foodId)
-//    }
 
 
     Column(modifier.padding(16.dp)) {

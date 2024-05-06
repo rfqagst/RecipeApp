@@ -43,14 +43,15 @@ fun RecepyApp() {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination?.route
+    val isDetailScreen = currentDestination?.startsWith(Screen.Detail.route) ?: false
 
     Scaffold(
         Modifier.fillMaxSize(),
         topBar = {
-            when (currentDestination) {
-                Screen.Detail.route -> MainTopBar(title = "Recipe", navController)
-                Screen.LocalFood.route -> MainTopBar(title = "Local Food", navController)
-                Screen.About.route -> MainTopBar(title = "About", navController)
+            when {
+                isDetailScreen -> MainTopBar(title = "Recipe", navController)
+                currentDestination == Screen.LocalFood.route -> MainTopBar(title = "Local Food", navController)
+                currentDestination == Screen.About.route -> MainTopBar(title = "About", navController)
             }
         },
         bottomBar = {
