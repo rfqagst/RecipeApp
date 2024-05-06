@@ -51,6 +51,8 @@ android {
 
 dependencies {
 
+    implementation (libs.lottie)
+
     implementation(libs.coil.compose)
 
     implementation (libs.androidx.ui.text.google.fonts)
